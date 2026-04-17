@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manga Player PRO</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #1a1a2e, #020617);
+            font-family: sans-serif;
+            color: white;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 0, 200, 0.4);
+        }
+
+        h1 {
+            color: #ff4ecd;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(45deg, #ff4ecd, #9333ea);
+            color: white;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>🎧 Manga Player</h1>
+
+        <input id="musicLink" placeholder="MP3 link qo‘y...">
+
+        <button onclick="playMusic()">▶ Play</button>
+
+        <div class="error" id="error"></div>
+
+        <audio id="player" controls></audio>
+    </div>
+
+    <script>
+        function isValidAudio(url) {
+            return url.endsWith(".mp3") || url.endsWith(".wav") || url.endsWith(".ogg");
+        }
+
+        function playMusic() {
+            const link = document.getElementById("musicLink").value;
+            const player = document.getElementById("player");
+            const error = document.getElementById("error");
+
+            if (!link) {
+                error.innerText = "Link kiriting!";
+                return;
+            }
+
+            if (!isValidAudio(link)) {
+                error.innerText = "Faqat MP3/WAV link ishlaydi!";
+                return;
+            }
+
+            error.innerText = "";
+            player.src = link;
+            player.play();
+        }
+    </script>
+
+</body>
+
+</html>
